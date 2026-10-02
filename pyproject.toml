@@ -9,7 +9,7 @@ description = "Read-only MCP server for searching a user's local LINE Desktop hi
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-authors = [{ name = "LINE Local MCP contributors" }]
+authors = [{ name = "DforDennies" }]
 keywords = ["line", "mcp", "model-context-protocol", "macos", "ai"]
 classifiers = [
   "Development Status :: 4 - Beta",
