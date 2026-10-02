@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.sentry-native/
+*.pyc
+dist/
+build/
+*.egg-info/
+chat_whitelist.json
