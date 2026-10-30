@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from datetime import datetime
+
 import apsw
 
 
@@ -113,7 +115,14 @@ def test_search_treats_wildcards_as_literal(repository):
     assert repository.search_messages("%", limit=10)["count"] == 0
 
 
-def test_recent_activity_groups_messages(repository):
+def test_recent_activity_groups_messages(repository, monkeypatch):
+    # Pin "now" just after the fixture messages so the window never drifts past them.
+    class FixedDatetime(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return datetime.fromtimestamp(1_786_503_600, tz)
+
+    monkeypatch.setattr("line_local_mcp.repository.datetime", FixedDatetime)
     result = repository.recent_activity(hours=744, chat_limit=10, messages_per_chat=10)
     assert {chat["name"] for chat in result["chats"]} == {"Alice", "Project Team"}
 

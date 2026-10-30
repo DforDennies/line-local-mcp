@@ -119,6 +119,11 @@ def setup_key() -> None:
                     result = subprocess.run(
                         [
                             "lldb",
+                            # The scanner only reads memory; skipping symbol loading keeps attach fast.
+                            "-O",
+                            "settings set target.preload-symbols false",
+                            "-O",
+                            "settings set symbols.load-on-demand true",
                             "-p",
                             str(process_id),
                             "-o",

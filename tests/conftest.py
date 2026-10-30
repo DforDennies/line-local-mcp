@@ -40,11 +40,11 @@ def repository(tmp_path: Path) -> LineRepository:
     cursor.execute("CREATE TABLE _profile (_mid TEXT)")
     cursor.execute("INSERT INTO _profile VALUES ('me')")
     cursor.execute(
-        "CREATE TABLE _contact (_mid TEXT, _displayName TEXT, _capableBuddy INTEGER)"
+        "CREATE TABLE _contact (_mid TEXT, _displayName TEXT, _userType INTEGER)"
     )
     cursor.executemany(
         "INSERT INTO _contact VALUES (?, ?, ?)",
-        [("alice", "Alice", 0), ("official", "Shop News", 1), ("me", "Me", 0)],
+        [("alice", "Alice", 0), ("official", "Shop News", 2), ("me", "Me", 0)],
     )
     cursor.execute("CREATE TABLE _groupChat (_chatMid TEXT, _chatName TEXT)")
     cursor.execute("INSERT INTO _groupChat VALUES ('group-1', 'Project Team')")

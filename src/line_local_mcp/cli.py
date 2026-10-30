@@ -350,7 +350,8 @@ def build_parser() -> argparse.ArgumentParser:
     # -- legacy flags (backward compat) --
     parser.add_argument("--setup-key", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--doctor", action="store_true", help=argparse.SUPPRESS)
-    parser.add_argument("--transport", choices=("stdio", "streamable-http"), default=None, help=argparse.SUPPRESS)
+    # Bare `line-local-mcp` must start the stdio server: MCP client configs in the README call it with no args.
+    parser.add_argument("--transport", choices=("stdio", "streamable-http"), default="stdio", help=argparse.SUPPRESS)
     parser.add_argument("--port", type=int, default=8765, help=argparse.SUPPRESS)
 
     return parser
@@ -398,10 +399,6 @@ def main() -> None:
             return
         # no wl subcommand → show list
         cmd_whitelist_list(args)
-        return
-
-    # no command at all → show help
-    parser.print_help()
 
 
 if __name__ == "__main__":
